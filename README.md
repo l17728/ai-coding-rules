@@ -13,6 +13,8 @@ It installs four layers:
 
 ## Install
 
+### From npm
+
 ```bash
 # one-off
 npx @decklijia/ai-coding-rules install
@@ -21,6 +23,22 @@ npx @decklijia/ai-coding-rules install
 npm i -g @decklijia/ai-coding-rules
 ai-coding-rules install
 ```
+
+### From a GitHub clone
+
+No npm install needed — the program is zero-dependency (pure Node built-ins).
+
+```bash
+git clone https://github.com/l17728/ai-coding-rules.git
+cd ai-coding-rules
+
+# Linux / macOS
+node bin/cli.js install          # or: scripts/install.sh install
+# Windows (PowerShell)
+node bin\cli.js install          # or: powershell -ExecutionPolicy Bypass -File scripts\install.ps1 install
+```
+
+The bootstrap scripts (`scripts/install.sh`, `scripts/install.ps1`) just forward to `bin/cli.js`, so any command/flag works: `install`, `uninstall`, `status`, `manual`, `--dry-run`, `--tools=`, `--force`. Requires Node >= 18.
 
 Preview first with `--dry-run`. The installer **never clobbers** your files: it edits markdown via a managed block, merges JSON keys only, and backs up any touched file to `*.bak-ai-coding-rules`.
 
