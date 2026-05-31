@@ -84,7 +84,7 @@ On stop, the command runs; if it fails, the turn is blocked until fixed (loop-gu
 This published npm package is **the tool itself** (deploy a ruleset into your agents). Authoring a *new* ruleset is a separate, repo-only workflow: **`git clone` this project**, then follow the methodology in
 **[docs/AUTHORING-RULES.md](https://github.com/l17728/ai-coding-rules/blob/master/docs/AUTHORING-RULES.md)**.
 
-It documents the missing "how the rules are produced" step — distill from your own sessions/memory/docs, place them in `content/`+`hooks/`, run `node bin/cli.js validate` (frontmatter + structure + secret scan), then repackage under your own npm scope. (`validate` and the authoring guide ship only in the git repo, not in the npm tool.)
+It documents the missing "how the rules are produced" step — distill from your own sessions/memory/docs, place them in `content/`+`hooks/`, run `node bin/cli.js validate` (frontmatter + structure + secret scan), then repackage under your own npm scope. (The authoring **guide** lives in the git repo only — `docs/` is excluded from the npm tarball, keeping the published package = the tool.)
 
 ## Publish
 ```bash
