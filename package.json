@@ -1,0 +1,33 @@
+{
+  "name": "ai-coding-rules",
+  "version": "0.1.0",
+  "description": "Cross-platform installer that deploys a dual-system (Claude Code + opencode) AI-coding engineering rule system: global constitution, auto-triggering skills, and enforcement hooks.",
+  "type": "module",
+  "bin": {
+    "ai-coding-rules": "bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "content",
+    "hooks",
+    "scripts",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node bin/cli.js status"
+  },
+  "keywords": [
+    "claude-code",
+    "opencode",
+    "ai-coding",
+    "skills",
+    "hooks",
+    "agents",
+    "installer"
+  ],
+  "license": "MIT"
+}

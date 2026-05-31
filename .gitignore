@@ -1,0 +1,9 @@
+node_modules/
+*.bak-ai-coding-rules
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.tgz
