@@ -51,6 +51,7 @@ ai-coding-rules install --tools=opencode
 ai-coding-rules install --force        # pre-stage even if a tool isn't detected yet
 ai-coding-rules uninstall              # clean removal (restores via managed-block/JSON edits)
 ai-coding-rules manual                 # path to the installed manual
+ai-coding-rules validate               # authoring: lint ruleset frontmatter/structure + secret scan
 ```
 
 ## What "no tool detected" does
@@ -81,10 +82,39 @@ On stop, the command runs; if it fails, the turn is blocked until fixed (loop-gu
 
 ## Build your own ruleset (meta-production — clone this repo)
 
-This published npm package is **the tool itself** (deploy a ruleset into your agents). Authoring a *new* ruleset is a separate, repo-only workflow: **`git clone` this project**, then follow the methodology in
-**[docs/AUTHORING-RULES.md](https://github.com/l17728/ai-coding-rules/blob/main/docs/AUTHORING-RULES.md)**.
+This published npm package is **the tool itself**. Authoring a *new* ruleset is a separate, repo-only workflow: **`git clone` this project**, distill rules from your own data, and republish **under your own identity**. Full methodology + an agent Runbook: **[docs/AUTHORING-RULES.md](https://github.com/l17728/ai-coding-rules/blob/main/docs/AUTHORING-RULES.md)**.
 
-It documents the missing "how the rules are produced" step — distill from your own sessions/memory/docs, place them in `content/`+`hooks/`, run `node bin/cli.js validate` (frontmatter + structure + secret scan), then repackage under your own npm scope. (The authoring **guide** lives in the git repo only — `docs/` is excluded from the npm tarball, keeping the published package = the tool.)
+### Quick start
+
+```bash
+git clone https://github.com/l17728/ai-coding-rules.git && cd ai-coding-rules
+# 1) Distill rules into content/ + hooks/ (follow docs/AUTHORING-RULES.md, or feed the Runbook to an agent)
+# 2) Validate: structure + skill frontmatter + secret scan
+node bin/cli.js validate
+# 3) Dry-run install (writes nothing) to self-check
+node bin/cli.js install --dry-run
+# 4) Make it YOURS (see checklist below), then publish
+npm version patch && npm publish --access public      # or via CI / GitHub Release
+```
+
+### ⚠️ Make it yours before publishing — do NOT reuse the original author's identity
+
+Forking means **publishing under your own account**, not `@decklijia` / `l17728`. Change all of:
+
+- **`package.json` → `name`**: use **your own npm scope/name**, e.g. `@youruser/your-rules` (publishing to `@decklijia/...` will be rejected — you don't own it).
+- **`package.json` → `author` / `repository` / `homepage` / `bugs`**: point to **your** name and **your** GitHub repo.
+- **GitHub repo**: push to **your own** repo (`git remote set-url origin https://github.com/youruser/your-repo.git`).
+- **npm account**: log in as **yourself** (`npm login`) — or, for CI, configure **Trusted Publishing on *your* npm package** pointing at **your** repo + `publish.yml` (see the Publish section; the bundled workflow's example owner/repo must be replaced with yours).
+- **`LICENSE`**: update the copyright holder.
+
+> 中文：fork 后必须**用你自己的身份发布**，不要沿用原作者（`@decklijia` / `l17728`）。务必修改：
+> - `package.json` 的 **`name`** 改成**你自己的 npm scope**（如 `@你的用户名/你的包名`；发到 `@decklijia/...` 会被拒，你没有权限）。
+> - `package.json` 的 **`author`/`repository`/`homepage`/`bugs`** 指向**你的**名字和**你的** GitHub 仓库。
+> - **GitHub 远程**改成你自己的仓库（`git remote set-url origin <你的仓库>`）。
+> - **npm 账户**用你自己的（`npm login`）；若走 CI，在**你自己的 npm 包**上配 Trusted Publisher，指向**你的**仓库与 `publish.yml`（`.github/workflows/publish.yml` 里示例的 owner/repo 也要换成你的）。
+> - 更新 **`LICENSE`** 的版权人。
+
+(The authoring **guide** lives in the git repo only — `docs/` is excluded from the npm tarball, keeping the published package = the tool. `validate` ships in the package but is meaningful only when authoring.)
 
 ## Publish
 
