@@ -18,6 +18,46 @@
 
 ---
 
+## 让 code agent 自动完成（Agent Runbook）
+
+目标效果：**给 agent 这份指南 + 指明原始数据位置，它就把规则蒸馏好、放好、校验通过**。把下面这段作为给 agent 的 prompt（替换尖括号）：
+
+```
+你的任务：基于本仓库 docs/AUTHORING-RULES.md 的方法论，从我的原始数据蒸馏出一套规则，
+替换 content/ 与 hooks/，使 `node bin/cli.js validate` 通过。
+
+原始数据位置：
+- Claude Code 会话：<如 ~/.claude/projects/>
+- opencode 会话：<如 ~/.local/share/opencode/storage/>
+- 项目 CLAUDE.md/AGENTS.md：<如 ~/code/*/>
+- 项目记忆：<如 ~/.claude/projects/*/memory/>
+- 其它过程文档：<复盘/learnings/部署脚本…>
+
+硬性要求：
+1. 先按 8 个维度分析（可并行 fan-out），产出分析中间笔记。
+2. 归到 4 层：薄宪法 / skills / hooks / 手册；每条标 🟢普适 或 🟡偏好。
+3. 写入 content/CONSTITUTION.md、content/opencode-AGENTS-core.md、content/MANUAL.md、
+   content/skills/<ascii-kebab>/SKILL.md（frontmatter: name + "Use when…"描述）。
+4. 绝不把任何密钥/token/密码写进规则（原始会话常含真实凭据）。
+5. 完成后运行 `node bin/cli.js validate`，必须 0 错误；再 `node bin/cli.js install --dry-run` 自检。
+6. 不要替我发布或动我真实的 ~/.claude、~/.config/opencode；只改本仓库 content/ 与 hooks/。
+报告：改了哪些文件、validate 结果、还需我人工确认/授权的点。
+```
+
+### 这套流程能自动到什么程度（诚实边界）
+| 阶段 | 能否全自动 |
+|------|-----------|
+| 扫描 + 分析 + 蒸馏 + 写入 content/hooks | ✅ agent 可独立完成 |
+| 结构/frontmatter/密钥**校验** | ✅ `node bin/cli.js validate`（确定性闸门，0 错误才算过） |
+| 临时目录试装/卸载 | ✅ 用 `CLAUDE_CONFIG_DIR`/`OPENCODE_CONFIG_DIR` 指向 temp 自测 |
+| 改 package.json 的 name/version | ✅ agent 可做 |
+| **规则质量抽检** | ⚠️ 建议人工扫一眼（模型判断可能有偏差） |
+| **npm publish** | ❌ 需要你的 token/OTP，且 npm 名唯一性需你定——无法全自动 |
+
+所以"一切就完成了"= **蒸馏→放置→校验→可发布状态**全自动；**最后的发布授权 + 一次质量抽检**保留给人。这正是 §第三步要你做的收尾。
+
+---
+
 ## 第一步：蒸馏方法论（Distill）
 
 ### 1.1 收集素材（扫这些）

@@ -59,6 +59,7 @@ Commands:
   install      Deploy global constitution, skills, hooks, and manual into detected tools
   uninstall    Remove everything this installer added
   status       Show detected tools and what is currently installed
+  validate     Check a (re)authored ruleset: skill frontmatter, structure, secret scan
   manual       Show the path to the installed user manual
 
 Options:
@@ -100,6 +101,12 @@ Examples:
     log.header(`Installing into: ${tools.join(', ')}${args.dryRun ? style.dim(' (dry-run)') : ''}`);
     const { runInstall } = await import('../src/install.js');
     await runInstall(tools, det, ctx);
+    return;
+  }
+
+  if (cmd === 'validate') {
+    const { runValidate } = await import('../src/validate.js');
+    process.exitCode = runValidate();
     return;
   }
 
