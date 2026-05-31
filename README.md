@@ -15,10 +15,10 @@ It installs four layers:
 
 ```bash
 # one-off
-npx ai-coding-rules install
+npx @decklijia/ai-coding-rules install
 
 # or globally, for a persistent command
-npm i -g ai-coding-rules
+npm i -g @decklijia/ai-coding-rules
 ai-coding-rules install
 ```
 
