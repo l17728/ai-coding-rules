@@ -11,6 +11,28 @@ It installs four layers:
 | **Hooks** | Deterministic enforcement: block-deploy-if-uncommitted, verify-before-done, project-md guard | Claude `settings.json`; opencode `plugin/` |
 | **Manual** | On-machine user guide | deployed per tool; `ai-coding-rules manual` |
 
+## Overview / 全景
+
+**Provenance.** This ruleset wasn't hand-written — it was *distilled* from real Claude Code + opencode sessions, project `CLAUDE.md`/`AGENTS.md`, memories, and post-mortems, then layered. Every rule is tagged **🟢 universal engineering principle** or **🟡 this author's preference**, so forks can keep the former and re-tune the latter.
+
+**The full pipeline:**
+
+```
+distill (sessions · project md · memories · post-mortems)
+  → 4-layer ruleset (constitution · skills · hooks · manual)
+    → installer (this npm tool — dual-system: Claude Code + opencode)
+      → open source (npm + GitHub)
+        → meta-production (clone → docs/AUTHORING-RULES.md + `validate` + agent Runbook → your own ruleset)
+          → token-free CI (GitHub Release → OIDC Trusted Publishing, with provenance)
+            → fork identity isolation (publish under your own account/scope)
+```
+
+The loop closes with the **`system-improvement-loop`** skill: new lessons → distill again → bump → republish.
+
+> 中文：本规则集**并非手写**，而是从真实的 Claude Code + opencode 会话、项目 `CLAUDE.md`/`AGENTS.md`、记忆与复盘中**蒸馏**并分层而来；每条标注 **🟢 普适工程原则** 或 **🟡 本作者偏好**，便于 fork 时保留前者、重调后者。
+> 全链路：**蒸馏（会话/项目文档/记忆/复盘）→ 四层规则（宪法·技能·钩子·手册）→ 安装器（双系统：Claude Code + opencode）→ npm/GitHub 开源 → 元生产（clone + `validate` + Agent Runbook）→ 免 token CI（Release → OIDC Trusted Publishing，带 provenance）→ fork 身份隔离（用你自己的账户/scope 发布）**。
+> 闭环由 **`system-improvement-loop`** 技能驱动：新教训 → 再蒸馏 → 升版 → 重发。
+
 ## Install
 
 ### From npm
