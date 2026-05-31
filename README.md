@@ -100,14 +100,32 @@ Preview first with `--dry-run`. The installer **never clobbers** your files: it 
 
 ## Commands
 
+**For users** — deploy & manage the ruleset (用户：部署与管理规则):
+
 ```
-ai-coding-rules status                 # detected tools + install state
-ai-coding-rules install [--dry-run]    # deploy (preview with -n)
-ai-coding-rules install --tools=opencode
+ai-coding-rules status                 # detected tools + current install state
+ai-coding-rules install [--dry-run]    # deploy constitution/skills/hooks/manual (preview with -n)
+ai-coding-rules install --tools=opencode   # limit to one tool
 ai-coding-rules install --force        # pre-stage even if a tool isn't detected yet
+ai-coding-rules manual                 # path to the installed user manual
 ai-coding-rules uninstall              # clean removal (restores via managed-block/JSON edits)
-ai-coding-rules manual                 # path to the installed manual
-ai-coding-rules validate               # authoring: lint ruleset frontmatter/structure + secret scan
+ai-coding-rules help                   # show help (-h / --help)
+```
+
+**For rule authors** — meta-production, run from a git clone (作者：造自己的规则集):
+
+```
+node bin/cli.js validate               # lint ruleset: skill frontmatter + structure + secret scan
+```
+
+**Options (flags):**
+
+```
+--tools=claude,opencode   limit to specific tools (default: all detected)
+--dry-run, -n             print actions without writing anything
+--force, -f               install even if a tool isn't detected (pre-stage to default dir)
+--yes, -y                 skip confirmation prompts
+--help, -h                show help
 ```
 
 ## What "no tool detected" does
