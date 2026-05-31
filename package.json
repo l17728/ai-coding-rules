@@ -1,6 +1,6 @@
 {
   "name": "@decklijia/ai-coding-rules",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Cross-platform installer that deploys a dual-system (Claude Code + opencode) AI-coding engineering rule system: global constitution, auto-triggering skills, and enforcement hooks.",
   "type": "module",
   "bin": {
