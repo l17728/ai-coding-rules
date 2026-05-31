@@ -12,6 +12,7 @@
     "content",
     "hooks",
     "scripts",
+    "docs",
     "README.md"
   ],
   "engines": {

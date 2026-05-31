@@ -79,6 +79,10 @@ On stop, the command runs; if it fails, the turn is blocked until fixed (loop-gu
 - Hooks for Claude are `.cjs` (run as CommonJS regardless of surrounding `package.json`), invoked as `node <script>` (exec form) — portable across Windows/POSIX.
 - opencode's Windows config dir varies by version; the installer resolves it via `opencode debug paths` and falls back to `OPENCODE_CONFIG_DIR` / XDG / `%APPDATA%`.
 
+## Build your own ruleset (use this as a framework)
+
+The installer and packaging are generic; the rules in `content/` + `hooks/` are just one instance, distilled from one user's sessions. To distill rules from **your own** sessions/memory/docs and ship them under your own npm scope, follow **[docs/AUTHORING-RULES.md](docs/AUTHORING-RULES.md)** — it documents the missing "how the rules are produced" step: the distillation methodology, where each rule goes in `content/`/`hooks/`, and how to repackage.
+
 ## Publish
 ```bash
 npm version patch
