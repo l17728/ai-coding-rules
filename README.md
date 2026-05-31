@@ -27,6 +27,40 @@ distill (sessions · project md · memories · post-mortems)
             → fork identity isolation (publish under your own account/scope)
 ```
 
+Architecture (rendered on GitHub):
+
+```mermaid
+flowchart TD
+    subgraph SRC["Raw material"]
+      S1["Claude / opencode sessions"]
+      S2["project CLAUDE.md / AGENTS.md"]
+      S3["memories + post-mortems"]
+    end
+    SRC --> D["Distill<br/>tag each 🟢 universal / 🟡 preference"]
+    D --> R
+    subgraph R["4-layer ruleset — content/ + hooks/"]
+      C["Constitution<br/>(thin, always-on)"]
+      K["16 auto-trigger skills"]
+      H["Hooks (deterministic)"]
+      M["Manual"]
+    end
+    R --> I["Installer (npm tool)<br/>bin/ + src/"]
+    I --> CC["Claude Code<br/>~/.claude (CLAUDE.md · skills · settings hooks)"]
+    I --> OC["opencode<br/>~/.config/opencode (AGENTS.md · skills · plugin)"]
+    I --> PUB["open source<br/>npm + GitHub"]
+    PUB --> MP
+    subgraph MP["Meta-production — git clone"]
+      RB["agent Runbook<br/>(docs/AUTHORING-RULES.md)"]
+      V["validate<br/>structure + frontmatter + secret scan"]
+    end
+    MP --> NR["your own ruleset<br/>(your npm scope + repo)"]
+    NR --> CI["GitHub Release → OIDC CI<br/>token-free + provenance"]
+    CI --> NPM2["your npm package"]
+    CC -.->|new lessons| L(["system-improvement-loop"])
+    OC -.->|new lessons| L
+    L -.->|re-distill| D
+```
+
 The loop closes with the **`system-improvement-loop`** skill: new lessons → distill again → bump → republish.
 
 > 中文：本规则集**并非手写**，而是从真实的 Claude Code + opencode 会话、项目 `CLAUDE.md`/`AGENTS.md`、记忆与复盘中**蒸馏**并分层而来；每条标注 **🟢 普适工程原则** 或 **🟡 本作者偏好**，便于 fork 时保留前者、重调后者。
