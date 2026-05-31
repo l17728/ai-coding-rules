@@ -1,6 +1,6 @@
 {
   "name": "@decklijia/ai-coding-rules",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Cross-platform installer that deploys a dual-system (Claude Code + opencode) AI-coding engineering rule system: global constitution, auto-triggering skills, and enforcement hooks.",
   "type": "module",
   "bin": {
@@ -32,11 +32,11 @@
   "author": "decklijia",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/decklijia/ai-coding-rules.git"
+    "url": "git+https://github.com/l17728/ai-coding-rules.git"
   },
-  "homepage": "https://github.com/decklijia/ai-coding-rules#readme",
+  "homepage": "https://github.com/l17728/ai-coding-rules#readme",
   "bugs": {
-    "url": "https://github.com/decklijia/ai-coding-rules/issues"
+    "url": "https://github.com/l17728/ai-coding-rules/issues"
   },
   "license": "MIT"
 }
